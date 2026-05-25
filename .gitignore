@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Scratch / dev artifacts at repo root — assets must live in /public/
+/*.jpeg
+/*.jpg
+/*.png
+/*.pdf
+/*.txt
+/Captura*
+/pngtree*
