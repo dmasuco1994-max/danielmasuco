@@ -2,6 +2,7 @@
 import { navLinks, personal } from "../lib/data";
 import { getLangFromUrl, t } from "../lib/i18n";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import Logo from "./Logo.astro";
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -18,12 +19,12 @@ const lang = getLangFromUrl(Astro.url);
       <a
         href="#hero"
         class="group flex items-center gap-2 font-display text-sm font-semibold tracking-tight"
+        aria-label="Daniel Masuco · home"
       >
-        <span
-          class="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#3D518C] via-[#ABD2FA] to-[#7692FF] text-bg shadow-[0_0_22px_-4px_rgba(171,210,250,0.55)] transition-transform group-hover:scale-110"
-        >
-          DM
-        </span>
+        <Logo
+          size={34}
+          class="transition-transform duration-300 group-hover:scale-110 [filter:drop-shadow(0_0_18px_rgba(118,146,255,0.45))]"
+        />
         <span class="hidden sm:inline">
           <span class="text-text">{personal.firstName}</span>
           <span class="text-text-muted"> · </span>

@@ -1,0 +1,72 @@
+---
+/**
+ * Daniel Masuco brand mark — custom DM letterforms + mint accent dot.
+ *
+ * - D rendered as a filled path with inner cutout (evenodd fill-rule).
+ * - M rendered as a stroked polyline with rounded line joins (custom, not a font).
+ * - Mint dot top-right as a brand accent (represents the "AI spark").
+ * - Gradient (Icy → Cornflower → Persian) matches the site palette.
+ *
+ * Used in Header, Footer, Hero card. Also rendered as /public/favicon.svg.
+ */
+
+interface Props {
+  size?: number;
+  class?: string;
+}
+
+const { size = 32, class: className = "" } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 64 64"
+  width={size}
+  height={size}
+  xmlns="http://www.w3.org/2000/svg"
+  class={`block shrink-0 ${className}`}
+  aria-label="Daniel Masuco"
+  role="img"
+>
+  <defs>
+    <linearGradient id="dm-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ABD2FA" />
+      <stop offset="50%" stop-color="#7692FF" />
+      <stop offset="100%" stop-color="#1B2CC1" />
+    </linearGradient>
+    <radialGradient id="dm-dot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A7F3D0" />
+      <stop offset="60%" stop-color="#00D492" />
+      <stop offset="100%" stop-color="#00956A" />
+    </radialGradient>
+  </defs>
+
+  <!-- Rounded square chip background -->
+  <rect width="64" height="64" rx="14" fill="url(#dm-bg)" />
+
+  <!-- Subtle inner highlight (top edge sheen) -->
+  <path
+    d="M 14,2 L 50,2 A 12,12 0 0,1 62,14 L 62,18 A 30,30 0 0,0 2,18 L 2,14 A 12,12 0 0,1 14,2 Z"
+    fill="rgba(255,255,255,0.18)"
+  />
+
+  <!-- D letterform — filled with inner hole (evenodd) -->
+  <path
+    d="M 13,17 L 23,17 A 15,15 0 0,1 23,47 L 13,47 Z M 18,22 L 23,22 A 10,10 0 0,1 23,42 L 18,42 Z"
+    fill="#050816"
+    fill-rule="evenodd"
+  />
+
+  <!-- M letterform — stroked polyline -->
+  <path
+    d="M 32,47 L 32,17 L 41,30 L 50,17 L 50,47"
+    fill="none"
+    stroke="#050816"
+    stroke-width="5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+
+  <!-- Mint accent dot (top right) — the "AI spark" -->
+  <circle cx="53" cy="13" r="3.5" fill="url(#dm-dot)" />
+  <circle cx="53" cy="13" r="6" fill="#00D492" opacity="0.25" />
+</svg>
