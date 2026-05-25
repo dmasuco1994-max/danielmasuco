@@ -11,6 +11,8 @@ import MultiAgent from "../components/MultiAgent";
 import Logo from "../components/Logo.astro";
 
 const heroPhotos = ["/profile.jpg", "/profile2.jpg", "/photo.jpg"];
+// Profile.jpg (la principal) se queda 6s, las otras 2.5s c/u — ciclo total ~11s
+const heroPhotoDurations = [6000, 2500, 2500];
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -128,7 +130,7 @@ const lang = getLangFromUrl(Astro.url);
               <PhotoCarousel
                 client:load
                 images={heroPhotos}
-                intervalMs={3000}
+                durations={heroPhotoDurations}
                 alt={`${personal.name} — ${t(lang, "hero.role")}`}
                 className="w-full"
               />

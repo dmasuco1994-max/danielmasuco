@@ -2,24 +2,31 @@ import { useEffect, useRef, useState } from "react";
 
 interface Props {
   images: readonly string[];
+  /** Default duration in ms per slide (used when `durations` is not provided). */
   intervalMs?: number;
+  /**
+   * Optional per-slide duration in ms (same length as `images`). When set,
+   * each slide gets its own dwell time. Falls back to `intervalMs` for any
+   * missing entry, letting you weight some slides heavier than others.
+   */
+  durations?: readonly number[];
   alt: string;
   className?: string;
-  /** If true, pauses when not visible to save CPU/battery. */
+  /** Pauses when scrolled out of view to save CPU/battery. */
   pauseOffScreen?: boolean;
 }
 
 /**
- * Crossfade carousel that cycles through `images` every `intervalMs`.
+ * Crossfade carousel that cycles through `images` with either uniform timing
+ * (`intervalMs`) or per-slide timing (`durations`).
  *
- * - SSR-safe: renders the first image visible by default.
- * - Crossfade via opacity transition (no layout shift).
- * - Respects prefers-reduced-motion (stays on first image, no auto-advance).
- * - Pauses the timer when the element is off-screen (default on).
+ * SSR-safe: renders the first image visible by default. Respects
+ * prefers-reduced-motion (stays on first image, no auto-advance).
  */
 export default function PhotoCarousel({
   images,
   intervalMs = 3000,
+  durations,
   alt,
   className = "",
   pauseOffScreen = true,
@@ -28,31 +35,20 @@ export default function PhotoCarousel({
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
+  // Schedule the NEXT slide using the current slide's individual duration.
+  // Effect re-runs every time `index` advances, picking up the next duration.
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (images.length < 2) return;
+    if (!visible) return;
 
-    let timer: number | null = null;
-
-    const tick = () => {
+    const slideMs = durations?.[index] ?? intervalMs;
+    const timer = window.setTimeout(() => {
       setIndex((i) => (i + 1) % images.length);
-    };
-    const start = () => {
-      if (timer != null) return;
-      timer = window.setInterval(tick, intervalMs);
-    };
-    const stop = () => {
-      if (timer != null) {
-        clearInterval(timer);
-        timer = null;
-      }
-    };
-
-    if (visible) start();
-
-    return () => stop();
-  }, [images.length, intervalMs, visible]);
+    }, slideMs);
+    return () => window.clearTimeout(timer);
+  }, [index, images.length, intervalMs, durations, visible]);
 
   // Pause when off-screen
   useEffect(() => {

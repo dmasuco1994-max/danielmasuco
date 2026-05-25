@@ -1,0 +1,155 @@
+                         DANIEL MASUCO                                  Buenos Aires, Argentina
+                                                                             +54 9 11 5405-8079
+                         AI & Automation Specialist | CTO &
+                         Founder Líder de Transformación Digital     dmasuco1994@gmail.com
+                                                                  linkedin.com/in/danielmasuco
+
+                                                  PERFIL EJECUTIVO
+
+Líder tecnológico con más de 10 años de trayectoria en IT, especializado en Inteligencia Artificial Aplicada, Automatización
+Inteligente (RPA) y Transformación Digital. Experiencia comprobada dirigiendo equipos técnicos, gestionando
+infraestructura crítica y diseñando soluciones end-to-end que traducen estrategia de negocio en eficiencia operativa
+cuantificable. Fundador de la consultora ZEUS IT y Consultor actual en el área de IA Generativa, agentes inteligentes y
+orquestación de procesos en plataformas low-code.
+
+                                              COMPETENCIAS CLAVE
+
+Inteligencia Artificial    Modelos de Lenguaje (LLMs), GPT, NLP, IA Generativa, IA Agentic
+Automatización             RPA a escala, n8n, Voicebots, IDP, Process Mining,
+Cloud & DevOps             AWS, Azure, infraestructura escalable, integraciones API
+Liderazgo                  Gestión de equipos técnicos, dirección de proyectos, P&L;
+Negocio                    Roadmap estratégico, stakeholders C-Level
+Integraciones              ERP, CRM, telecomunicaciones, plataformas low-code
+
+                              EXPERIENCIA PROFESIONAL
+
+AI & Automation Engineer & Consultant - Tec5.tech                Jul 2025 -- Presente|Buenos Aires,
+                                                                 Argentina
+
+· Traduzco la estrategia de negocio en soluciones de automatización de alto impacto, llevando los procesos
+
+más allá de la simple optimización hacia niveles de productividad y calidad superiores.
+
+· Diseño arquitecturas de automatización end-to-end: process mining, discovery, implementación y gobierno de
+
+Centros de Excelencia (CoE).
+
+· Implemento RPA a escala con orquestación de flotas digitales para operaciones críticas en plataformas
+
+líderes del mercado.
+
+· Aplico Machine Learning, NLP, Visión por Computador e IDP para automatizar decisiones y tareas
+
+cognitivas complejas, transformando datos no estructurados en inteligencia accionable.
+
+· Integro IA Generativa y LLMs (GPT y otros) para potenciar interacción, creación de contenido y resolución de
+
+problemas en los flujos automatizados.
+
+· Colaboro con stakeholders de alto nivel en la definición del roadmap estratégico, cuantificación de ROI y
+
+alineación de iniciativas con los objetivos de la organización.
+
+IT Specialist - Tec5.tech                                        Dic 2020 -- Sep 2021 | Buenos Aires,
+                                                                 Argentina
+
+· Análisis y resolución de incidentes en tiempo real, asegurando alta disponibilidad de los servicios.
+
+· Gestión preventiva de servicios IT y mantenimiento de enlaces de telecomunicaciones.
+
+· Elaboración de reportes de TI para la toma de decisiones estratégicas y propuestas de mejora orientadas al
+
+cliente.
+
+                                                                                         Daniel Masuco -- Página 1
+DANIEL MASUCO                                                                             Buenos Aires, Argentina
+                                                                                               +54 9 11 5405-8079
+AI & Automation Specialist | CTO & Founder
+Líder de Transformación Digital                                                        dmasuco1994@gmail.com
+                                                                                    linkedin.com/in/danielmasuco
+
+CTO & Founder - ZEUS IT                                      Jul 2024 -- Presente | Buenos Aires,
+                                                             Argentina
+
+· Fundé y lidero una consultora tecnológica enfocada en automatización, integración de sistemas y
+
+soluciones a medida, construyendo el equipo técnico y la cartera de clientes desde cero.
+
+· Diseño e implementación de flujos de automatización low-code (n8n) e integraciones entre plataformas
+
+(ERP, CRM, APIs).
+
+· Desarrollo de voicebots para atención y cobranzas, optimizando operaciones de contacto con clientes.
+
+· Despliegue y administración de infraestructura cloud (AWS, Azure) y prácticas DevOps para asegurar
+
+escalabilidad y continuidad.
+
+· Servicios complementarios: soporte técnico, redes y ciberseguridad, posicionando a ZEUS IT como aliado
+
+tecnológico integral.
+
+Gerente de Tecnología ­ GRUPO DASA                                       Sep 2021 -- Ago 2025 (4 años) |
+                                                                         Microcentro, Buenos Aires
+
+· Liderazgo técnico integral del área de Sistemas, dirigiendo equipos de desarrollo, operaciones e
+
+infraestructura.
+
+· Gestión de proyectos IT end-to-end, asegurando cumplimiento de plazos, presupuesto y objetivos
+
+estratégicos.
+
+· Implementación, mantenimiento y actualización de la plataforma de telecomunicaciones garantizando
+
+continuidad operativa.
+
+· Administración de infraestructura con foco en optimización de recursos y reducción de costos.
+
+· Coordinación del equipo de Operaciones de Legaltech, facilitando la integración de soluciones tecnológicas
+
+en procesos legales.
+
+· Desarrollo de soluciones RPA que mejoraron la eficiencia operativa y redujeron significativamente los tiempos
+
+de procesamiento.
+
+Jefe de Tecnología - Marcelo H. Pena S.A.                                Jul 2018 -- Nov 2020 |
+                                                                         Microcentro, Buenos Aires
+
+· Administración de sistemas y gestión integral del Centro de Cómputos.
+
+· Liderazgo del equipo técnico, fomentando colaboración y mejora continua.
+
+· Implementación de soluciones de alta disponibilidad y redundancia de servicios.
+
+· Gestión de telefonía y telecomunicaciones con optimización de costos operativos.
+
+Líder Técnico IT - Tandem Technology S.A.                    Jun 2014 -- Jun 2018 | Buenos Aires,
+                                                             Argentina
+
+· Soporte IT Tier 1 y 2: resolución de incidencias de hardware, software, telefonía IP y redes.
+
+· Participación en proyectos de implementación de nuevas tecnologías y coordinación de mudanzas técnicas.
+
+· Administración de CRM y mejora de la gestión de clientes.
+
+                                                                                    Daniel Masuco -- Página 2
+DANIEL MASUCO                                               Buenos Aires, Argentina
+                                                                  +54 9 11 5405-8079
+  AI & Automation Specialist | CTO & Founder
+  Líder de Transformación Digital                         dmasuco1994@gmail.com
+                                                      linkedin.com/in/danielmasuco
+FORMACIÓN ACADÉMICA
+  Licenciatura en Gerencia de Empresas          2020 -- 2024
+                                                2014 -- 2018
+  Universidad Nacional de Avellaneda (UNDAV)
+  Tecnicatura Superior en Grabación de Sonido
+  Centro de Arte y Tecnología (CEARTEC)
+
+ IDIOMAS
+
+  Español -- Nativo | Inglés -- Base / Técnico
+
+                                                Daniel Masuco -- Página 3
+
