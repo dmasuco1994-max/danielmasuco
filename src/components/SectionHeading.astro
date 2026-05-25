@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: "left" | "center";
+}
+const { eyebrow, title, subtitle, align = "center" } = Astro.props;
+const alignCls =
+  align === "center" ? "text-center items-center" : "text-left items-start";
+---
+
+<div class={`flex flex-col gap-3 mb-12 ${alignCls}`}>
+  {
+    eyebrow && (
+      <span class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-accent-glow backdrop-blur">
+        <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent-glow animate-pulse" />
+        {eyebrow}
+      </span>
+    )
+  }
+  <h2 class="font-display text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
+    <slot name="title">{title}</slot>
+  </h2>
+  {
+    subtitle && (
+      <p class="max-w-2xl text-base text-text-muted sm:text-lg">{subtitle}</p>
+    )
+  }
+</div>

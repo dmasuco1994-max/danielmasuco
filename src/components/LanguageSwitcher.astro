@@ -1,0 +1,39 @@
+---
+import { getLangFromUrl, swapLangInUrl, languages, type Lang } from "../lib/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const items: Lang[] = ["es", "en"];
+---
+
+<div
+  class="glass-strong relative inline-flex items-center gap-0.5 rounded-full p-0.5 text-[11px] font-semibold"
+  role="group"
+  aria-label="Language"
+>
+  {
+    items.map((l) => {
+      const isActive = l === lang;
+      const href = swapLangInUrl(Astro.url, l);
+      return (
+        <a
+          href={href}
+          class={`relative grid h-7 min-w-9 place-items-center rounded-full px-2.5 uppercase tracking-wider transition-colors ${
+            isActive
+              ? "text-bg"
+              : "text-text-muted hover:text-text"
+          }`}
+          aria-current={isActive ? "page" : undefined}
+          aria-label={languages[l]}
+        >
+          {isActive && (
+            <span
+              aria-hidden
+              class="absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-[#3D518C] via-[#ABD2FA] to-[#7692FF] shadow-[0_0_18px_-4px_rgba(171,210,250,0.55)]"
+            />
+          )}
+          {l}
+        </a>
+      );
+    })
+  }
+</div>

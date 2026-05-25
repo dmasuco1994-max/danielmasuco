@@ -1,0 +1,241 @@
+---
+import { personal, zeusBrand, getContent } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import SectionHeading from "../components/SectionHeading.astro";
+import Reveal from "../components/Reveal";
+import {
+  Hammer,
+  Briefcase,
+  BookOpen,
+  Send,
+  Target,
+  Lightbulb,
+  Rocket,
+  Users,
+  Sparkles,
+} from "lucide-react";
+
+const lang = getLangFromUrl(Astro.url);
+const c = getContent(lang);
+
+const nowIconMap = { Hammer, Briefcase, BookOpen, Send };
+const principleIconMap = { Target, Lightbulb, Rocket, Users };
+const principleAccents = ["#7692FF", "#00D492", "#ABD2FA", "#7692FF"];
+---
+
+<section id="about" class="relative scroll-mt-20 py-20 sm:py-28 md:py-32">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading
+      eyebrow={t(lang, "about.eyebrow")}
+      title={t(lang, "about.title")}
+      subtitle={t(lang, "about.sub")}
+    />
+
+    <!-- TOP ROW: Bio paragraphs + Now widget -->
+    <div class="grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:gap-10">
+      <Reveal client:load>
+        <div class="space-y-4 leading-relaxed text-text-muted text-fluid-base sm:text-fluid-lg">
+          {c.about.paragraphs.map((p) => <p set:html={p} />)}
+
+          <div class="flex flex-wrap gap-2 pt-3">
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-[36px] items-center gap-2 rounded-lg border border-border bg-surface/60 px-3 py-1.5 text-xs text-text-muted backdrop-blur transition hover:border-accent hover:text-accent-glow"
+            >
+              💼 LinkedIn
+            </a>
+            <a
+              href={`mailto:${personal.email}`}
+              class="inline-flex min-h-[36px] items-center gap-2 rounded-lg border border-border bg-surface/60 px-3 py-1.5 text-xs text-text-muted backdrop-blur transition hover:border-accent hover:text-accent-glow"
+            >
+              ✉ {personal.email}
+            </a>
+            <a
+              href={zeusBrand.url}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex min-h-[36px] items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent-glow backdrop-blur transition hover:bg-accent/20"
+            >
+              ⚡ {zeusBrand.name}
+            </a>
+          </div>
+        </div>
+      </Reveal>
+
+      <!-- NOW widget — Derek Sivers style "what I'm up to" card -->
+      <Reveal client:load delay={0.1}>
+        <div
+          class="conic-border relative h-full overflow-hidden rounded-2xl"
+        >
+          <div
+            class="relative h-full rounded-[calc(1rem-1px)] bg-gradient-to-br from-surface/85 to-bg-elevated/70 p-5 backdrop-blur-xl sm:p-6"
+          >
+            <!-- Background sparkle decoration -->
+            <div
+              aria-hidden
+              class="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[#7692FF]/20 blur-3xl"
+            ></div>
+
+            <!-- Header -->
+            <div class="relative flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <span class="relative flex h-2 w-2">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00D492] opacity-70"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-[#00D492]"></span>
+                </span>
+                <h3
+                  class="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#00D492]"
+                >
+                  {t(lang, "about.nowTitle")}
+                </h3>
+              </div>
+              <Sparkles size={14} className="text-text-dim" />
+            </div>
+            <p class="mt-1 font-mono text-[10px] text-text-dim">
+              {t(lang, "about.nowSub")}
+            </p>
+
+            <!-- Entries -->
+            <ul class="relative mt-4 space-y-3">
+              {
+                c.about.now.map((entry) => {
+                  const Icon = nowIconMap[entry.icon];
+                  return (
+                    <li class="group flex gap-3">
+                      <span
+                        class={`grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-border bg-bg-elevated/60 text-[#ABD2FA] transition group-hover:border-[#00D492]/60 group-hover:text-[#00D492]`}
+                      >
+                        <Icon size={15} strokeWidth={1.8} />
+                      </span>
+                      <div class="min-w-0 flex-1">
+                        <p class="font-mono text-[9px] uppercase tracking-widest text-text-dim">
+                          {entry.label}
+                        </p>
+                        <p class="mt-0.5 text-sm leading-snug text-text">
+                          {entry.text}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })
+              }
+            </ul>
+
+            <!-- Footer hint -->
+            <p
+              class="relative mt-5 border-t border-border-subtle pt-3 text-center font-mono text-[10px] italic tracking-wider text-text-dim/70"
+            >
+              {personal.location}
+            </p>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+
+    <!-- MIDDLE: How I work — 4 principle cards -->
+    <div class="mt-14 sm:mt-20">
+      <Reveal client:load>
+        <div class="mb-8 flex flex-col items-center gap-2 text-center">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow backdrop-blur sm:text-[11px]"
+          >
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent-glow animate-pulse"></span>
+            {t(lang, "about.principlesTitle")}
+          </span>
+          <p class="text-text-muted text-fluid-sm sm:text-fluid-base">
+            {t(lang, "about.principlesSub")}
+          </p>
+        </div>
+      </Reveal>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          c.about.principles.map((p, i) => {
+            const Icon = principleIconMap[p.icon];
+            const accent = principleAccents[i % principleAccents.length];
+            return (
+              <Reveal client:load delay={0.08 * i}>
+                <div
+                  class="group relative h-full overflow-hidden rounded-2xl border border-border bg-surface/50 p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[color:var(--accent-color)] hover:shadow-[0_12px_30px_-12px_var(--accent-shadow)]"
+                  style={`--accent-color:${accent};--accent-shadow:${accent}66`}
+                >
+                  <!-- Glow blob in corner -->
+                  <div
+                    aria-hidden
+                    class="absolute -right-8 -top-8 h-28 w-28 rounded-full opacity-0 blur-2xl transition group-hover:opacity-60"
+                    style={`background:${accent}`}
+                  ></div>
+
+                  <!-- Number marker -->
+                  <span
+                    class="absolute right-3 top-3 font-mono text-[10px] font-semibold tabular-nums text-text-dim/50"
+                  >
+                    0{i + 1}
+                  </span>
+
+                  <!-- Icon -->
+                  <span
+                    class="relative grid h-11 w-11 place-items-center rounded-xl border border-border bg-bg-elevated/70 transition-all group-hover:scale-110"
+                    style={`color:${accent};box-shadow:inset 0 0 12px ${accent}22`}
+                  >
+                    <Icon size={20} strokeWidth={1.8} />
+                  </span>
+
+                  <!-- Title -->
+                  <h4
+                    class="relative mt-4 font-display text-base font-semibold tracking-tight text-text"
+                  >
+                    {p.title}
+                  </h4>
+
+                  <!-- Description -->
+                  <p class="relative mt-1.5 text-xs leading-relaxed text-text-muted">
+                    {p.desc}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- BOTTOM: Competencias clave (existing, kept) -->
+    <div class="mt-14 sm:mt-20">
+      <Reveal client:load>
+        <div class="mb-6 flex flex-col items-center gap-2 text-center">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow backdrop-blur sm:text-[11px]"
+          >
+            <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent-glow animate-pulse"></span>
+            {t(lang, "about.competenciesTitle")}
+          </span>
+        </div>
+      </Reveal>
+
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          c.competencies.map((comp, i) => (
+            <Reveal client:load delay={0.05 * i}>
+              <div class="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-4 backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/60 sm:p-5">
+                <div aria-hidden class="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-gradient-to-br from-[#ABD2FA]/30 to-[#1B2CC1]/0 opacity-0 blur-2xl transition group-hover:opacity-100" />
+                <h4 class="relative font-display text-sm font-semibold uppercase tracking-wider text-accent-glow">
+                  {comp.title}
+                </h4>
+                <ul class="relative mt-3 flex flex-wrap gap-1.5">
+                  {comp.items.map((item) => (
+                    <li class="rounded-md border border-border-subtle bg-bg-elevated/50 px-2 py-0.5 text-[11px] text-text-muted">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

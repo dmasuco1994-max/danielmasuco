@@ -1,0 +1,174 @@
+---
+import { personal, stats, zeusBrand } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import MagneticButton from "../components/MagneticButton";
+import AnimatedCounter from "../components/AnimatedCounter";
+import Reveal from "../components/Reveal";
+import AuroraText from "../components/AuroraText";
+import FloatingOrbs from "../components/FloatingOrbs";
+import PhotoCarousel from "../components/PhotoCarousel";
+import MultiAgent from "../components/MultiAgent";
+
+const heroPhotos = ["/profile.jpg", "/profile2.jpg", "/photo.jpg"];
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<section
+  id="hero"
+  class="relative flex min-h-[calc(100svh-5rem)] items-center overflow-hidden pt-20 pb-10 sm:pt-24 sm:pb-14 lg:min-h-[85svh]"
+>
+  <!-- Floating orbs particles -->
+  <FloatingOrbs client:idle count={20} />
+
+  <div class="mx-auto grid w-full max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12">
+    <!-- Left: copy -->
+    <div class="flex flex-col gap-5 sm:gap-6">
+      <Reveal client:load>
+        <div class="flex flex-wrap items-center gap-2">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow backdrop-blur sm:text-[11px]"
+          >
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+            </span>
+            {t(lang, "hero.badge")}
+          </span>
+          <a
+            href={zeusBrand.url}
+            target="_blank"
+            rel="noopener"
+            class="group inline-flex items-center gap-1.5 rounded-full border border-[#7692FF]/50 bg-[#1B2CC1]/15 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#ABD2FA] backdrop-blur transition hover:bg-[#1B2CC1]/25 sm:text-[11px]"
+          >
+            <img src={zeusBrand.logo} alt="" class="h-3 w-3 object-contain" />
+            <span>{zeusBrand.name}</span>
+            <span class="opacity-60 transition group-hover:translate-x-0.5">↗</span>
+          </a>
+        </div>
+      </Reveal>
+
+      <Reveal client:load delay={0.1}>
+        <h1 class="font-display font-bold leading-[0.95] tracking-tighter text-fluid-hero">
+          <span class="block text-text">{personal.firstName}</span>
+          <AuroraText className="block">{personal.lastName}</AuroraText>
+        </h1>
+      </Reveal>
+
+      <Reveal client:load delay={0.2}>
+        <p class="font-mono uppercase tracking-[0.22em] text-accent-2 text-fluid-xs sm:text-fluid-sm">
+          {t(lang, "hero.role")}
+        </p>
+      </Reveal>
+
+      <Reveal client:load delay={0.3}>
+        <p class="max-w-xl leading-relaxed text-text-muted text-fluid-base sm:text-fluid-lg">
+          {t(lang, "hero.tagline")}
+        </p>
+      </Reveal>
+
+      <Reveal client:load delay={0.4}>
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <MagneticButton
+            client:load
+            href="#contact"
+            className="group inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r from-[#1B2CC1] via-[#ABD2FA] to-[#7692FF] px-5 py-3 text-sm font-semibold text-bg shadow-[0_8px_30px_-8px_rgba(27,44,193,0.6)] transition-shadow hover:shadow-[0_8px_40px_-6px_rgba(27,44,193,0.85)] sm:px-6"
+          >
+            <span>{t(lang, "cta.contactLong")}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" class="transition-transform group-hover:translate-x-1">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </MagneticButton>
+
+          <MagneticButton
+            client:load
+            href={personal.cvUrl}
+            download={true}
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-border bg-surface/60 px-5 py-3 text-sm font-medium text-text backdrop-blur transition hover:border-accent hover:text-accent-glow sm:px-6"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v12m-5-5l5 5 5-5M5 21h14" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            {t(lang, "cta.cv")}
+          </MagneticButton>
+        </div>
+      </Reveal>
+
+      <Reveal client:load delay={0.55}>
+        <div class="mt-4 grid grid-cols-2 gap-3 border-t border-border-subtle pt-5 sm:mt-6 sm:grid-cols-4 sm:pt-6">
+          <div class="flex flex-col">
+            <AnimatedCounter client:load value={stats[0].value} suffix={stats[0].suffix} className="font-display font-bold text-gradient text-fluid-xl" />
+            <span class="mt-1 text-[11px] text-text-dim sm:text-xs">{t(lang, "hero.stats.years")}</span>
+          </div>
+          <div class="flex flex-col">
+            <AnimatedCounter client:load value={stats[1].value} suffix={stats[1].suffix} className="font-display font-bold text-gradient text-fluid-xl" />
+            <span class="mt-1 text-[11px] text-text-dim sm:text-xs">{t(lang, "hero.stats.processes")}</span>
+          </div>
+          <div class="flex flex-col">
+            <AnimatedCounter client:load value={stats[2].value} suffix={stats[2].suffix} className="font-display font-bold text-gradient text-fluid-xl" />
+            <span class="mt-1 text-[11px] text-text-dim sm:text-xs">{t(lang, "hero.stats.hours")}</span>
+          </div>
+          <div class="flex flex-col">
+            <AnimatedCounter client:load value={stats[3].value} suffix={stats[3].suffix} className="font-display font-bold text-gradient text-fluid-xl" />
+            <span class="mt-1 text-[11px] text-text-dim sm:text-xs">{t(lang, "hero.stats.errors")}</span>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+
+    <!-- Right: portrait + code -->
+    <div class="relative flex flex-col gap-5 sm:gap-6">
+      <Reveal client:load delay={0.2}>
+        <div class="relative mx-auto w-full max-w-md">
+          <div aria-hidden class="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-[#1B2CC1]/30 via-[#ABD2FA]/35 to-[#7692FF]/25 opacity-75 blur-3xl"></div>
+
+          <div class="glass-strong relative overflow-hidden rounded-[2rem] p-1.5">
+            <div class="relative overflow-hidden rounded-[1.6rem]">
+              <PhotoCarousel
+                client:load
+                images={heroPhotos}
+                intervalMs={3000}
+                alt={`${personal.name} — ${t(lang, "hero.role")}`}
+                className="w-full"
+              />
+              <div class="absolute left-3 top-3 inline-flex items-center gap-2 rounded-lg glass px-2.5 py-1.5 text-[10px] font-mono uppercase tracking-widest">
+                <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                {t(lang, "hero.online")}
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 rounded-xl glass-strong p-3">
+                <div class="flex items-center gap-2.5">
+                  <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-[#3D518C] via-[#ABD2FA] to-[#7692FF] text-bg text-xs font-bold">
+                    DM
+                  </span>
+                  <div class="min-w-0 leading-tight">
+                    <p class="truncate text-xs font-semibold text-text">
+                      CTO & Founder · {zeusBrand.name}
+                    </p>
+                    <p class="text-[10px] text-text-muted">
+                      AI · Automation · Cloud
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal client:load delay={0.4}>
+        <div class="hidden sm:block">
+          <MultiAgent client:visible lang={lang} />
+        </div>
+      </Reveal>
+    </div>
+  </div>
+
+  <a
+    href="#zeus"
+    aria-label={t(lang, "cta.scroll")}
+    class="absolute bottom-4 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 text-text-dim transition hover:text-accent-glow md:flex"
+  >
+    <span class="text-[10px] uppercase tracking-widest">{t(lang, "cta.scroll")}</span>
+    <span class="block h-8 w-px bg-gradient-to-b from-accent-glow to-transparent"></span>
+  </a>
+</section>

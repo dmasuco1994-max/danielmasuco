@@ -1,0 +1,101 @@
+---
+import { getContent } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import SectionHeading from "../components/SectionHeading.astro";
+import Reveal from "../components/Reveal";
+
+const lang = getLangFromUrl(Astro.url);
+const c = getContent(lang);
+---
+
+<section id="experience" class="relative scroll-mt-20 py-20 sm:py-28 md:py-32">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    <SectionHeading
+      eyebrow={t(lang, "exp.eyebrow")}
+      title={t(lang, "exp.title")}
+      subtitle={t(lang, "exp.sub")}
+    />
+
+    <div class="relative">
+      <div
+        aria-hidden
+        class="absolute left-3 top-3 bottom-3 hidden w-px bg-gradient-to-b from-accent via-accent-2 to-transparent md:left-4 md:block"
+      ></div>
+
+      <ol class="space-y-5 sm:space-y-6">
+        {
+          c.experience.map((job, i) => (
+            <Reveal client:load delay={0.05 * i}>
+              <li class="group relative pl-0 md:pl-14">
+                <span
+                  aria-hidden
+                  class={`absolute left-0 top-7 hidden h-3 w-3 rounded-full border-2 md:left-3 md:block ${
+                    job.current
+                      ? "border-accent-glow bg-accent shadow-[0_0_18px_-2px_rgba(167,139,250,0.85)]"
+                      : "border-border bg-bg-elevated"
+                  }`}
+                >
+                  {job.current && (
+                    <span class="absolute inset-0 animate-ping rounded-full bg-accent-glow opacity-50" />
+                  )}
+                </span>
+
+                <article
+                  class={`relative overflow-hidden rounded-2xl border bg-surface/50 p-5 backdrop-blur-xl transition hover:-translate-y-0.5 sm:p-6 ${
+                    job.highlight
+                      ? "border-accent/50 shadow-[0_0_40px_-12px_rgba(124,58,237,0.55)]"
+                      : "border-border hover:border-accent/40"
+                  }`}
+                >
+                  {job.highlight && (
+                    <div
+                      aria-hidden
+                      class="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#ABD2FA]/10 via-transparent to-[#1B2CC1]/10"
+                    />
+                  )}
+
+                  <div class="relative flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <div class="flex flex-wrap items-center gap-2">
+                        <h3 class="font-display text-base font-semibold text-text sm:text-lg md:text-xl">
+                          {job.role}
+                        </h3>
+                        {job.current && (
+                          <span class="inline-flex rounded-full border border-accent/60 bg-accent/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-accent-glow">
+                            {t(lang, "exp.current")}
+                          </span>
+                        )}
+                      </div>
+                      <p class="mt-1 text-sm font-medium text-accent-glow">
+                        {job.company}
+                        <span class="ml-2 text-text-dim">· {job.location}</span>
+                      </p>
+                    </div>
+                    <span
+                      class={`inline-flex shrink-0 self-start rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider ${
+                        job.current
+                          ? "border-accent/60 bg-accent/10 text-accent-glow"
+                          : "border-border bg-bg-elevated/60 text-text-muted"
+                      }`}
+                    >
+                      {job.period}
+                    </span>
+                  </div>
+
+                  <ul class="relative mt-4 space-y-1.5">
+                    {job.bullets.map((b) => (
+                      <li class="flex gap-2 text-sm leading-relaxed text-text-muted">
+                        <span class="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-accent-2" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </li>
+            </Reveal>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

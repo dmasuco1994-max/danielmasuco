@@ -1,0 +1,120 @@
+---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/space-grotesk";
+import "../styles/globals.css";
+import { ClientRouter } from "astro:transitions";
+import SmoothScroll from "../components/SmoothScroll";
+import CursorSpotlight from "../components/CursorSpotlight";
+import ScrollProgress from "../components/ScrollProgress";
+import MeshGradient from "../components/MeshGradient";
+import { getLangFromUrl } from "../lib/i18n";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const defaults = {
+  es: {
+    title:
+      "Daniel Masuco · CTO & Founder ZEUS IT · AI & Automation Specialist",
+    description:
+      "Daniel Masuco — CTO & Founder de ZEUS IT. +10 años transformando estrategia de negocio en eficiencia operativa con IA Generativa, agentes inteligentes y RPA a escala.",
+  },
+  en: {
+    title:
+      "Daniel Masuco · CTO & Founder ZEUS IT · AI & Automation Specialist",
+    description:
+      "Daniel Masuco — CTO & Founder of ZEUS IT. 10+ years turning business strategy into measurable operational efficiency with Generative AI, intelligent agents and RPA at scale.",
+  },
+};
+
+const {
+  title = defaults[lang].title,
+  description = defaults[lang].description,
+  image = "/og.png",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#050816" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Hreflang alternates -->
+    <link rel="alternate" hreflang="es" href={new URL("/", Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL("/en/", Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", Astro.site)} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:locale" content={lang === "es" ? "es_AR" : "en_US"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <ClientRouter />
+  </head>
+  <body class="relative">
+    <MeshGradient client:load />
+    <ScrollProgress client:load />
+    <CursorSpotlight client:idle />
+    <SmoothScroll client:load />
+
+    <div class="relative z-10">
+      <slot />
+    </div>
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Daniel Masuco",
+        jobTitle: "AI & Automation Specialist · CTO & Founder",
+        worksFor: {
+          "@type": "Organization",
+          name: "ZEUS IT",
+          url: "https://zeusit.com.ar",
+        },
+        url: canonical.toString(),
+        sameAs: [
+          "https://www.linkedin.com/in/danielmasuco",
+          "https://zeusit.com.ar",
+        ],
+        email: "dmasuco1994@gmail.com",
+        telephone: "+5491154058079",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Buenos Aires",
+          addressCountry: "AR",
+        },
+      })}
+    />
+  </body>
+</html>

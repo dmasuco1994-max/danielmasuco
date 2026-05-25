@@ -1,0 +1,58 @@
+---
+import { stack, getContent } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import SectionHeading from "../components/SectionHeading.astro";
+import Marquee from "../components/Marquee";
+import Reveal from "../components/Reveal";
+
+const lang = getLangFromUrl(Astro.url);
+const c = getContent(lang);
+---
+
+<section id="stack" class="relative scroll-mt-20 py-20 sm:py-28 md:py-32">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <SectionHeading
+      eyebrow={t(lang, "stack.eyebrow")}
+      title={t(lang, "stack.title")}
+      subtitle={t(lang, "stack.sub")}
+    />
+
+    <Reveal client:load>
+      <div class="space-y-5">
+        <Marquee client:load speed="slow">
+          {
+            stack.slice(0, 9).map((tech) => (
+              <span class="group inline-flex items-center gap-2 rounded-xl border border-border bg-surface/60 px-4 py-2.5 backdrop-blur transition hover:border-accent/60 hover:bg-bg-elevated">
+                <span
+                  class="h-2 w-2 rounded-full transition group-hover:scale-150"
+                  style={`background:${tech.color};box-shadow:0 0 12px ${tech.color}`}
+                />
+                <span class="font-mono text-sm font-medium text-text">{tech.name}</span>
+                <span class="rounded-md bg-bg/70 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-text-dim">
+                  {c.stackCategories[tech.catKey] ?? tech.catKey}
+                </span>
+              </span>
+            ))
+          }
+        </Marquee>
+
+        <Marquee client:load reverse speed="slow">
+          {
+            stack.slice(9).map((tech) => (
+              <span class="group inline-flex items-center gap-2 rounded-xl border border-border bg-surface/60 px-4 py-2.5 backdrop-blur transition hover:border-accent/60 hover:bg-bg-elevated">
+                <span
+                  class="h-2 w-2 rounded-full transition group-hover:scale-150"
+                  style={`background:${tech.color};box-shadow:0 0 12px ${tech.color}`}
+                />
+                <span class="font-mono text-sm font-medium text-text">{tech.name}</span>
+                <span class="rounded-md bg-bg/70 px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-text-dim">
+                  {c.stackCategories[tech.catKey] ?? tech.catKey}
+                </span>
+              </span>
+            ))
+          }
+        </Marquee>
+      </div>
+    </Reveal>
+  </div>
+</section>

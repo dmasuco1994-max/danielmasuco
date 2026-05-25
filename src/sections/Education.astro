@@ -1,0 +1,80 @@
+---
+import { getContent } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import SectionHeading from "../components/SectionHeading.astro";
+import Reveal from "../components/Reveal";
+import { GraduationCap, Music, Languages } from "lucide-react";
+
+const lang = getLangFromUrl(Astro.url);
+const c = getContent(lang);
+const iconMap = { GraduationCap, Music };
+---
+
+<section id="education" class="relative scroll-mt-20 py-20 sm:py-28 md:py-32">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6">
+    <SectionHeading eyebrow={t(lang, "edu.eyebrow")} title={t(lang, "edu.title")} />
+
+    <div class="grid gap-5 md:grid-cols-2 md:gap-6">
+      <Reveal client:load>
+        <div class="rounded-2xl border border-border bg-surface/50 p-5 backdrop-blur-xl sm:p-6">
+          <h3 class="mb-4 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wider text-accent-glow">
+            <GraduationCap size={16} />
+            {t(lang, "edu.acadTitle")}
+          </h3>
+          <ul class="space-y-3 sm:space-y-4">
+            {
+              c.education.map((e) => {
+                const Icon = iconMap[e.icon];
+                return (
+                  <li class="group flex gap-3 rounded-xl border border-border-subtle p-3 transition hover:border-accent/40 hover:bg-bg-elevated/40">
+                    <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border bg-bg-elevated/60 text-accent-glow">
+                      <Icon size={18} />
+                    </span>
+                    <div class="min-w-0">
+                      <p class="text-sm font-semibold text-text">{e.title}</p>
+                      <p class="text-xs text-text-muted">{e.institution}</p>
+                      <p class="mt-1 font-mono text-[10px] uppercase tracking-wider text-text-dim">
+                        {e.period}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+      </Reveal>
+
+      <Reveal client:load delay={0.1}>
+        <div class="rounded-2xl border border-border bg-surface/50 p-5 backdrop-blur-xl sm:p-6">
+          <h3 class="mb-4 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wider text-accent-glow">
+            <Languages size={16} />
+            {t(lang, "edu.langsTitle")}
+          </h3>
+          <ul class="space-y-4">
+            {
+              c.languages.map((l) => (
+                <li>
+                  <div class="mb-1 flex items-center justify-between">
+                    <span class="text-sm font-semibold text-text">{l.name}</span>
+                    <span class="text-xs text-text-muted">{l.level}</span>
+                  </div>
+                  <div class="h-1.5 overflow-hidden rounded-full bg-border-subtle">
+                    <div
+                      class="h-full rounded-full bg-gradient-to-r from-[#1B2CC1] via-[#ABD2FA] to-[#7692FF] transition-[width] duration-1000"
+                      style={`width:${l.percent}%`}
+                    />
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="mt-6 rounded-xl border border-border-subtle bg-bg-elevated/40 p-4">
+            <p class="text-xs text-text-muted">{t(lang, "edu.continuous")}</p>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </div>
+</section>

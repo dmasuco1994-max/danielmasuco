@@ -1,0 +1,285 @@
+---
+import { personal, zeusBrand, getContent } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import Reveal from "../components/Reveal";
+import MagneticButton from "../components/MagneticButton";
+import TiltCard from "../components/TiltCard";
+import AuroraText from "../components/AuroraText";
+import { ArrowUpRight, Check, Bot, Workflow, ShieldCheck, Briefcase, MapPinned, Target, Route, Sparkles } from "lucide-react";
+
+const lang = getLangFromUrl(Astro.url);
+const c = getContent(lang);
+const iconMap = { Bot, Workflow, ShieldCheck, Briefcase };
+const waMsg = encodeURIComponent(
+  lang === "es"
+    ? "Hola Daniel, vi tu portfolio y quería consultarte por ZEUS IT."
+    : "Hi Daniel, I saw your portfolio and want to ask about ZEUS IT.",
+);
+---
+
+<section id="zeus" class="relative scroll-mt-20 py-20 sm:py-28 md:py-32">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <!-- HERO CARD: Conic-border mega card -->
+    <Reveal client:load>
+      <div class="conic-border relative overflow-hidden rounded-3xl">
+        <div
+          class="relative overflow-hidden rounded-[calc(1.5rem-1px)] bg-gradient-to-br from-[#1B2CC1]/12 via-bg-elevated to-[#ABD2FA]/8 p-6 sm:p-10 lg:p-14"
+        >
+          <!-- Animated grid background -->
+          <div aria-hidden class="absolute inset-0 opacity-30 grid-bg"></div>
+          <div aria-hidden class="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-[#ABD2FA]/15 blur-3xl"></div>
+          <div aria-hidden class="absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-[#1B2CC1]/25 blur-3xl"></div>
+
+          <div class="relative grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-center lg:gap-12">
+            <div class="space-y-5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="inline-flex items-center gap-2 rounded-full border border-accent/50 bg-accent/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow sm:text-[11px]"
+                >
+                  <span class="inline-block h-1.5 w-1.5 rounded-full bg-accent-glow animate-pulse" />
+                  {t(lang, "zeus.eyebrow")}
+                </span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-text-dim sm:text-[11px]">
+                  zeusit.com.ar
+                </span>
+              </div>
+
+              <h2 class="font-display font-bold tracking-tighter text-fluid-3xl">
+                <span class="block text-text">{t(lang, "zeus.titleA")}</span>
+                <AuroraText className="block">{t(lang, "zeus.titleB")}</AuroraText>
+              </h2>
+
+              <p class="font-mono uppercase tracking-[0.22em] text-accent-2 text-fluid-xs">
+                {t(lang, "zeus.tagline")}
+              </p>
+
+              <p class="leading-relaxed text-text-muted text-fluid-base sm:text-fluid-lg">
+                {t(lang, "zeus.pitch")}
+              </p>
+
+              <ul class="grid gap-2 pt-2">
+                {
+                  c.zeus.bullets.map((b) => (
+                    <li class="flex items-start gap-2 text-sm text-text">
+                      <Check size={16} className="mt-0.5 shrink-0 text-accent-glow" />
+                      <span>{b}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+
+              <div class="flex flex-wrap gap-3 pt-3">
+                <MagneticButton
+                  client:load
+                  href={zeusBrand.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="group inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r from-[#1B2CC1] via-[#ABD2FA] to-[#7692FF] px-5 py-3 text-sm font-semibold text-bg shadow-[0_8px_30px_-8px_rgba(27,44,193,0.55)] transition-shadow hover:shadow-[0_8px_40px_-6px_rgba(27,44,193,0.8)] sm:px-6"
+                >
+                  {t(lang, "cta.knowZeus")}
+                  <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </MagneticButton>
+                <a
+                  href={`https://wa.me/${personal.whatsapp}?text=${waMsg}`}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-border bg-surface/60 px-5 py-3 text-sm font-medium text-text backdrop-blur transition hover:border-accent hover:text-accent-glow sm:px-6"
+                >
+                  💬 {t(lang, "cta.whatsapp")}
+                </a>
+              </div>
+            </div>
+
+            <!-- Logo + mini metrics -->
+            <div class="relative">
+              <div aria-hidden class="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-[#1B2CC1]/28 via-[#ABD2FA]/25 to-[#7692FF]/22 blur-2xl"></div>
+              <div class="glass-strong overflow-hidden rounded-3xl p-6 text-center sm:p-8">
+                <div class="mx-auto mb-4 grid h-28 w-28 place-items-center rounded-3xl bg-bg shadow-inner sm:h-32 sm:w-32">
+                  <img
+                    src={zeusBrand.logo}
+                    alt={`${zeusBrand.name} logo`}
+                    class="h-20 w-20 object-contain sm:h-24 sm:w-24"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="font-display text-xl font-bold text-text sm:text-2xl">{zeusBrand.name}</p>
+                <p class="mt-1 text-[10px] uppercase tracking-widest text-text-dim sm:text-xs">
+                  {t(lang, "zeus.tagline")}
+                </p>
+                <div class="mt-6 grid grid-cols-3 gap-2 border-t border-border-subtle pt-4 text-center">
+                  <div>
+                    <p class="font-display text-lg font-bold text-gradient sm:text-xl">10+</p>
+                    <p class="text-[10px] text-text-dim">years</p>
+                  </div>
+                  <div>
+                    <p class="font-display text-lg font-bold text-gradient sm:text-xl">200+</p>
+                    <p class="text-[10px] text-text-dim">{lang === "es" ? "procesos" : "processes"}</p>
+                  </div>
+                  <div>
+                    <p class="font-display text-lg font-bold text-gradient sm:text-xl">70%</p>
+                    <p class="text-[10px] text-text-dim">- errors</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+
+    <!-- PILLARS: bento with tilt cards -->
+    <div class="mt-12 sm:mt-16">
+      <Reveal client:load>
+        <div class="mb-8 flex flex-col gap-2 text-center">
+          <span class="inline-flex items-center justify-center gap-2 self-center rounded-full border border-border bg-surface/50 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow sm:text-[11px]">
+            <Sparkles size={12} />
+            {t(lang, "zeus.pillarsTitle")}
+          </span>
+          <h3 class="mt-1 font-display font-semibold tracking-tight text-fluid-2xl">
+            {t(lang, "zeus.pillarsSub")}
+          </h3>
+        </div>
+      </Reveal>
+
+      <div class="grid gap-4 sm:gap-5 lg:grid-cols-3">
+        {
+          c.zeus.pillars.map((p, i) => {
+            const Icon = iconMap[p.icon as keyof typeof iconMap];
+            return (
+              <Reveal client:load delay={0.08 * i}>
+                <TiltCard client:visible max={6} scale={1.015}>
+                  <div class="group h-full overflow-hidden rounded-2xl border border-border bg-surface/60 p-px backdrop-blur-xl transition-colors hover:border-accent/50">
+                    <div class={`absolute inset-0 bg-gradient-to-br ${p.gradient} opacity-60`} aria-hidden></div>
+                    <div class="relative flex h-full flex-col gap-4 rounded-[15px] bg-bg-elevated/85 p-5 backdrop-blur-md sm:p-6">
+                      <div class="flex items-center gap-3">
+                        <span class="grid h-12 w-12 place-items-center rounded-xl border border-border bg-bg/80 text-accent-glow shadow-inner shadow-accent/10">
+                          <Icon size={22} strokeWidth={1.6} />
+                        </span>
+                        <h4 class="font-display text-lg font-semibold tracking-tight sm:text-xl">
+                          {p.title}
+                        </h4>
+                      </div>
+                      <p class="text-sm leading-relaxed text-text-muted">{p.description}</p>
+                      <ul class="mt-auto flex flex-col gap-1.5 border-t border-border-subtle pt-4">
+                        {p.bullets.map((b) => (
+                          <li class="flex items-center gap-2 text-xs text-text">
+                            <Check size={14} className="text-accent-glow" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </TiltCard>
+              </Reveal>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- CASES: 3 cards before/after/impact -->
+    <div class="mt-12 sm:mt-16">
+      <Reveal client:load>
+        <div class="mb-8 flex flex-col gap-2 text-center">
+          <span class="inline-flex items-center justify-center gap-2 self-center rounded-full border border-border bg-surface/50 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow sm:text-[11px]">
+            <Target size={12} />
+            {t(lang, "zeus.casesTitle")}
+          </span>
+          <p class="text-text-muted text-fluid-sm sm:text-fluid-base">
+            {t(lang, "zeus.casesSub")}
+          </p>
+        </div>
+      </Reveal>
+
+      <div class="grid gap-4 sm:gap-5 lg:grid-cols-3">
+        {
+          c.zeus.cases.map((caso, i) => (
+            <Reveal client:load delay={0.08 * i}>
+              <div class="group relative h-full overflow-hidden rounded-2xl border border-border bg-surface/50 p-5 backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-accent/50 sm:p-6">
+                <div aria-hidden class="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-accent/15 opacity-0 blur-3xl transition group-hover:opacity-100"></div>
+
+                <span class="relative inline-flex rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-accent-glow">
+                  {caso.area}
+                </span>
+
+                <div class="relative mt-4 space-y-3 text-sm">
+                  <div>
+                    <p class="text-[10px] font-semibold uppercase tracking-widest text-text-dim">
+                      {t(lang, "zeus.case.before")}
+                    </p>
+                    <p class="mt-1 text-text-muted">{caso.before}</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-semibold uppercase tracking-widest text-emerald-300/80">
+                      {t(lang, "zeus.case.after")}
+                    </p>
+                    <p class="mt-1 text-text">{caso.after}</p>
+                  </div>
+                  <div class="rounded-xl border border-accent/30 bg-accent/5 p-3">
+                    <p class="text-[10px] font-semibold uppercase tracking-widest text-accent-glow">
+                      {t(lang, "zeus.case.impact")}
+                    </p>
+                    <p class="mt-1 text-text-muted">{caso.impact}</p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- AUDIT BLOCK -->
+    <div class="mt-12 sm:mt-16">
+      <Reveal client:load>
+        <div class="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-surface/80 to-bg-elevated/60 p-6 backdrop-blur-xl sm:p-10">
+          <div aria-hidden class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#1B2CC1]/22 blur-3xl"></div>
+          <div class="grid gap-6 md:grid-cols-[1fr_1.6fr] md:items-center">
+            <div>
+              <h3 class="font-display font-semibold tracking-tight text-fluid-xl">
+                {t(lang, "zeus.auditTitle")}
+              </h3>
+              <p class="mt-3 text-text-muted text-fluid-sm">
+                {t(lang, "zeus.auditSub")}
+              </p>
+              <a
+                href={`https://wa.me/${personal.whatsapp}?text=${waMsg}`}
+                target="_blank"
+                rel="noopener"
+                class="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gradient-to-r from-[#1B2CC1] via-[#ABD2FA] to-[#7692FF] px-5 py-3 text-sm font-semibold text-bg shadow-lg shadow-[#1B2CC1]/35 transition hover:shadow-[#1B2CC1]/60"
+              >
+                {t(lang, "cta.audit")}
+                <ArrowUpRight size={16} />
+              </a>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-3">
+              <div class="rounded-2xl border border-border-subtle bg-bg-elevated/60 p-4">
+                <MapPinned size={20} className="text-accent-glow" />
+                <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-accent-glow">
+                  {t(lang, "zeus.audit.input")}
+                </p>
+                <p class="mt-1 text-sm text-text-muted">{t(lang, "zeus.audit.inputDesc")}</p>
+              </div>
+              <div class="rounded-2xl border border-border-subtle bg-bg-elevated/60 p-4">
+                <Target size={20} className="text-accent-glow" />
+                <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-accent-glow">
+                  {t(lang, "zeus.audit.output")}
+                </p>
+                <p class="mt-1 text-sm text-text-muted">{t(lang, "zeus.audit.outputDesc")}</p>
+              </div>
+              <div class="rounded-2xl border border-border-subtle bg-bg-elevated/60 p-4">
+                <Route size={20} className="text-accent-glow" />
+                <p class="mt-3 text-xs font-semibold uppercase tracking-widest text-accent-glow">
+                  {t(lang, "zeus.audit.roadmap")}
+                </p>
+                <p class="mt-1 text-sm text-text-muted">{t(lang, "zeus.audit.roadmapDesc")}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </div>
+</section>

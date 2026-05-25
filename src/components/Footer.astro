@@ -1,0 +1,103 @@
+---
+import { personal, navLinks, zeusBrand } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+const lang = getLangFromUrl(Astro.url);
+const year = new Date().getFullYear();
+---
+
+<footer class="relative mt-24 border-t border-border-subtle sm:mt-32">
+  <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+    <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+      <div class="col-span-1 sm:col-span-2 md:col-span-2">
+        <div class="flex items-center gap-2 font-display font-semibold">
+          <span
+            class="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-[#3D518C] via-[#ABD2FA] to-[#7692FF] text-bg"
+          >
+            DM
+          </span>
+          <span>{personal.name}</span>
+        </div>
+        <p class="mt-3 max-w-md text-sm text-text-muted">
+          CTO & Founder · <a class="text-accent-glow hover:underline" href={zeusBrand.url} target="_blank" rel="noopener">{zeusBrand.name}</a>
+          <span class="text-text-dim"> · </span>
+          AI & Automation Specialist
+        </p>
+        <a
+          href={zeusBrand.url}
+          target="_blank"
+          rel="noopener"
+          class="mt-4 inline-flex items-center gap-2 rounded-lg border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs text-accent-glow transition hover:bg-accent/20"
+        >
+          <img src={zeusBrand.logo} alt="" class="h-4 w-4 object-contain" />
+          zeusit.com.ar →
+        </a>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-text-dim">
+          {t(lang, "footer.nav")}
+        </h3>
+        <ul class="mt-3 grid grid-cols-2 gap-1.5 sm:grid-cols-1">
+          {
+            navLinks.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  class="text-sm text-text-muted transition hover:text-text"
+                >
+                  {t(lang, l.labelKey as any)}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-text-dim">
+          {t(lang, "footer.contact")}
+        </h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>
+            <a
+              href={`mailto:${personal.email}`}
+              class="text-text-muted transition hover:text-accent-glow break-all"
+            >
+              {personal.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`https://wa.me/${personal.whatsapp}`}
+              target="_blank"
+              rel="noopener"
+              class="text-text-muted transition hover:text-accent-glow"
+            >
+              {personal.phone}
+            </a>
+          </li>
+          <li>
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener"
+              class="text-text-muted transition hover:text-accent-glow"
+            >
+              LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col items-start justify-between gap-3 border-t border-border-subtle pt-6 text-xs text-text-dim sm:flex-row sm:items-center"
+    >
+      <p>© {year} {personal.name}. {t(lang, "footer.rights")}</p>
+      <p>
+        {t(lang, "footer.built")} <span class="text-accent-glow">Astro</span> +
+        <span class="text-accent-2">Tailwind</span>
+      </p>
+    </div>
+  </div>
+</footer>

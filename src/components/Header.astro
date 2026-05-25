@@ -1,0 +1,125 @@
+---
+import { navLinks, personal } from "../lib/data";
+import { getLangFromUrl, t } from "../lib/i18n";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+>
+  <div class="mx-auto mt-3 max-w-6xl px-3 sm:px-6">
+    <nav
+      class="glass-strong flex items-center justify-between gap-3 rounded-2xl px-3 py-2.5 shadow-2xl shadow-black/40 sm:px-4"
+      aria-label="Main navigation"
+    >
+      <a
+        href="#hero"
+        class="group flex items-center gap-2 font-display text-sm font-semibold tracking-tight"
+      >
+        <span
+          class="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[#3D518C] via-[#ABD2FA] to-[#7692FF] text-bg shadow-[0_0_22px_-4px_rgba(171,210,250,0.55)] transition-transform group-hover:scale-110"
+        >
+          DM
+        </span>
+        <span class="hidden sm:inline">
+          <span class="text-text">{personal.firstName}</span>
+          <span class="text-text-muted"> · </span>
+          <span class="text-gradient">{personal.lastName}</span>
+        </span>
+      </a>
+
+      <ul class="hidden items-center gap-1 lg:flex">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="rounded-lg px-3 py-1.5 text-sm text-text-muted transition-colors hover:bg-white/5 hover:text-text"
+              >
+                {t(lang, link.labelKey as any)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <LanguageSwitcher />
+        <a
+          href={personal.cvUrl}
+          download
+          class="hidden h-9 items-center rounded-lg border border-border bg-surface/60 px-3 text-xs font-medium text-text transition hover:border-accent hover:bg-accent/10 hover:text-accent-glow sm:inline-flex"
+        >
+          {t(lang, "cta.cvShort")}
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex h-9 items-center rounded-lg bg-gradient-to-r from-[#1B2CC1] via-[#ABD2FA] to-[#7692FF] px-3 text-xs font-semibold text-bg shadow-lg shadow-[#1B2CC1]/30 transition hover:shadow-[#1B2CC1]/55"
+        >
+          {t(lang, "cta.contact")}
+        </a>
+        <button
+          id="menu-toggle"
+          type="button"
+          class="grid h-9 w-9 place-items-center rounded-lg text-text-muted hover:bg-white/5 lg:hidden"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <div
+      id="mobile-menu"
+      class="glass-strong mt-2 hidden overflow-hidden rounded-2xl lg:hidden"
+    >
+      <ul class="flex flex-col p-2">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="block rounded-lg px-3 py-2.5 text-sm text-text-muted transition hover:bg-white/5 hover:text-text"
+                data-mobile-link
+              >
+                {t(lang, link.labelKey as any)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 20) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  };
+  document.addEventListener("astro:page-load", () => {
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  });
+
+  document.addEventListener("astro:page-load", () => {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    if (!toggle || !menu) return;
+    toggle.addEventListener("click", () => {
+      const open = menu.classList.toggle("hidden") === false;
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+    menu.querySelectorAll("[data-mobile-link]").forEach((a) =>
+      a.addEventListener("click", () => menu.classList.add("hidden")),
+    );
+  });
+</script>
