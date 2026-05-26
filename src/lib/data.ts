@@ -48,7 +48,7 @@ export const stack = [
   { name: "MongoDB", catKey: "Data", color: "#47a248" },
   { name: "Linux", catKey: "Infra", color: "#fcc624" },
   { name: "Microsoft 365", catKey: "Infra", color: "#d83b01" },
-  { name: "NIST · ISO 27001", catKey: "Security", color: "#dc143c" },
+  { name: "NIST ·", catKey: "Security", color: "#dc143c" },
   { name: "Voicebots · IDP", catKey: "AI", color: "#9333ea" },
 ] as const;
 
@@ -59,7 +59,7 @@ from n8n_client import trigger_workflow
 # Daniel Masuco · CTO & Founder · ZEUS IT
 class AutomationAgent:
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4o", temperature=0)
+        self.llm = ChatOpenAI(model="CODEX", temperature=0)
         self.tools = [self.crm_lookup, self.invoice_parser]
 
     async def run(self, task: str) -> dict:
