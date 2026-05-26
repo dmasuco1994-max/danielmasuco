@@ -215,7 +215,7 @@ const contentEs: Content = {
         bullets: [
           "DevOps · Docker · K8s",
           "Cloud AWS · Azure",
-          "GRC · ISO 27001",
+          "GRC ·",
         ],
         gradient: "from-[#ABD2FA]/15 via-[#3D518C]/10 to-transparent",
       },
